@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "next build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d out "
   },
   "dependencies": {
     "@types/node": "20.6.2",
@@ -27,5 +27,5 @@
   "devDependencies": {
     "gh-pages": "^6.0.0"
   },
-  "homepage": "https://gahmorais.github.io/main"
+  "homepage": "https://gahmorais.github.io/personal-page"
 }
