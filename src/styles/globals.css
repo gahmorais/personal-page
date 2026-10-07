@@ -3,25 +3,71 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --paper: 232 237 241;
+  --ink: 22 33 58;
+  --graphite: 84 94 113;
+  --rule: 196 206 216;
+  --laser: 227 38 47;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --paper: 22 33 58;
+    --ink: 232 237 241;
+    --graphite: 160 171 190;
+    --rule: 52 66 94;
+    --laser: 255 82 90;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-paper text-ink antialiased;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--laser));
+  outline-offset: 3px;
+}
+
+/* Linha vermelha do leitor de código de barras */
+.laser {
+  position: absolute;
+  top: -8%;
+  bottom: -8%;
+  width: 2px;
+  margin-left: -1px;
+  background: rgb(var(--laser));
+  box-shadow: 0 0 10px 2px rgb(var(--laser) / 0.55);
+  pointer-events: none;
+}
+
+.laser-sweep {
+  left: 0;
+  opacity: 0;
+  animation: laser-sweep 1.4s ease-in-out 0.3s 1;
+}
+
+@keyframes laser-sweep {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+.fade-in {
+  animation: fade-in 150ms ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laser-sweep,
+  .fade-in {
+    animation: none;
+  }
 }
