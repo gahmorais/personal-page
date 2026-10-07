@@ -1,12 +1,16 @@
+import Head from "next/head";
 import ListItem from "@/components/ListItem";
 import ListLink from "@/components/ListLink";
-import ListTitle from "@/components/ListText";
-import BigTitle from "@/components/Title";
+import ListTitle from "@/components/ListTitle";
+import Title from "@/components/Title";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <BigTitle>Projetos</BigTitle>
+    <main className="flex min-h-screen flex-col items-center gap-16 p-24">
+      <Head>
+        <title>Projetos | Gabriel Morais</title>
+      </Head>
+      <Title>Projetos</Title>
       <ul className="list-decimal">
         <ListItem>
           <ListTitle>Kotlin</ListTitle>
@@ -56,7 +60,6 @@ export default function Home() {
           </ListLink>
         </ListItem>
       </ul>
-      <div></div>
     </main>
   );
 }

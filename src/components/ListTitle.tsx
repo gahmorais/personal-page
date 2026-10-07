@@ -1,6 +1,7 @@
-interface IPropsListText {
+interface IPropsListTitle {
   children: string;
 }
-export default function ListText({ children }: IPropsListText) {
+
+export default function ListTitle({ children }: IPropsListTitle) {
   return <p className="text-2xl font-semibold font-sans">{children}</p>;
 }

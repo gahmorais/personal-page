@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 interface IPropsListLink {
   children: string;
   url: string;
@@ -9,5 +7,14 @@ export default function ListLink({
   children: description,
   url,
 }: IPropsListLink) {
-  return <Link className="text-blue-500 text-xl block" href={url}>{description}</Link>;
+  return (
+    <a
+      className="text-blue-500 text-xl block"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {description}
+    </a>
+  );
 }
