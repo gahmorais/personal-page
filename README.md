@@ -20,10 +20,13 @@ em `profile.ts`, projetos em `projects.ts`. Os componentes só renderizam esses 
 ## Verificação
 
 ```bash
-npm run lint       # ESLint com a config do Next
+npm run lint       # ESLint (flat config em eslint.config.mjs)
 npm run typecheck  # tsc --noEmit
 npm run build      # gera o site estático em out/
 ```
+
+O Next 16 removeu o `next lint`, então o ESLint roda pelo CLI próprio. A config
+estende `eslint-config-next/core-web-vitals`, que já vem em flat config.
 
 Os três rodam no CI a cada push, antes do deploy.
 
