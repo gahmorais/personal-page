@@ -15,7 +15,7 @@ export const nameBarcode =
   "110100100001101000100010100011000100010110001100010111011000100010100011010001000110111011011001100101110110001000111011011000101110101000110001100010001011011101000111101101101100011101011";
 
 export const links = {
-  linkedin: "https://www.linkedin.com/in/gabrielmorais-dev",
+  linkedin: "https://www.linkedin.com/in/gabriel-morais-dev/",
   github: "https://github.com/gahmorais",
 };
 
