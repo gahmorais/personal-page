@@ -12,7 +12,7 @@ const linkClass =
 
 const title = "Gabriel Morais | Engenheiro de software";
 const description =
-  "Engenheiro de software que lidera apps Android para coletores de dados e terminais de consulta no varejo.";
+  "Engenheiro de software e líder do time de engenharia que projeta e programa coletores de dados e terminais de consulta Android para o varejo.";
 const ogImage = `${siteUrl}/og.png`;
 
 export default function Home() {
@@ -56,7 +56,7 @@ export default function Home() {
 
           <p className="mt-10 max-w-prose text-xl leading-relaxed">
             Comecei consertando impressoras e leitores de código de barras em nível de componente.
-            Hoje lidero o desenvolvimento dos apps Android que rodam nesses mesmos equipamentos: de
+            Hoje lidero o time de engenharia que projeta e programa esses mesmos equipamentos: de
             500 a 2.000 coletores e terminais de consulta em produção no varejo.
           </p>
           <p className="mt-4 max-w-prose text-xl leading-relaxed">

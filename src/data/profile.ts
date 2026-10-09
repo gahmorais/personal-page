@@ -61,16 +61,16 @@ export const roles: Role[] = [
     company: "BKP Automação",
     lane: "software",
     summary:
-      "Software para equipamentos de código de barras e automação comercial, escrito por quem já tinha consertado esses equipamentos por dentro.",
+      "Desenvolvimento do software das mesmas impressoras, leitores e coletores que eu reparava na bancada. O primeiro foi um app Android em Kotlin para inventário de equipamentos numa rede de supermercados de 20 lojas, com autenticação por técnico e gravação no Realtime Database do Firebase.",
   },
   {
     start: "2025",
     end: "hoje",
-    title: "Engenheiro de software líder",
+    title: "Líder de engenharia",
     company: "BKP Automação",
     lane: "both",
     summary:
-      "Lidero os apps Android de coletores de dados e terminais de consulta, com 500 a 2.000 dispositivos em produção no varejo.",
+      "Lidero o time de engenharia: o desenvolvimento de software, dois engenheiros projetistas mecânicos e um analista de suporte que também desenvolve. Os apps Android de coletores de dados e terminais de consulta estão em 500 a 2.000 dispositivos em produção no varejo.",
     details: [
       "Deploy e gestão da frota de tablets em modo kiosk via MDM, e avaliação de uma solução própria com a Android Management API.",
       "Migração da frota do Android 12 para o 14, tratando as mudanças de permissões e de comportamento da plataforma.",
