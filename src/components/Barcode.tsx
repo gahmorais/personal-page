@@ -2,7 +2,10 @@ import { PointerEvent, useState } from "react";
 
 interface IPropsBarcode {
   pattern: string;
+  /** Legenda abaixo das barras; o mesmo texto que o padrão codifica */
   text: string;
+  /** Descrição da imagem, já no idioma da página */
+  alt: string;
 }
 
 // Agrupa os módulos "1" consecutivos em barras com posição e largura
@@ -17,7 +20,7 @@ function toBars(pattern: string) {
   return bars;
 }
 
-export default function Barcode({ pattern, text }: IPropsBarcode) {
+export default function Barcode({ pattern, text, alt }: IPropsBarcode) {
   const [laserX, setLaserX] = useState<number | null>(null);
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
@@ -37,7 +40,7 @@ export default function Barcode({ pattern, text }: IPropsBarcode) {
           preserveAspectRatio="none"
           className="block h-20 w-full text-ink sm:h-28"
           role="img"
-          aria-label={`Código de barras com o texto ${text}`}
+          aria-label={alt}
         >
           {toBars(pattern).map((bar) => (
             <rect key={bar.x} x={bar.x} width={bar.width} height="40" fill="currentColor" />

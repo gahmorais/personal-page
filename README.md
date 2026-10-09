@@ -1,7 +1,13 @@
 # personal-page
 
 Página pessoal com a minha trajetória e a lista dos meus projetos no GitHub,
-publicada em https://gahmorais.github.io/personal-page.
+publicada em https://gahmorais.github.io/personal-page, em três idiomas:
+
+| Endereço | Idioma |
+| --- | --- |
+| [`/`](https://gahmorais.github.io/personal-page/) | português |
+| [`/en`](https://gahmorais.github.io/personal-page/en/) | inglês |
+| [`/es`](https://gahmorais.github.io/personal-page/es/) | espanhol |
 
 Feita com Next.js (Pages Router), TypeScript e Tailwind CSS, exportada como site estático.
 
@@ -14,8 +20,43 @@ npm run dev
 
 Acesse http://localhost:3000.
 
-Todo o conteúdo fica em [`src/data/`](src/data/): cargos, competências e formação
-em `profile.ts`, projetos em `projects.ts`. Os componentes só renderizam esses dados.
+O conteúdo é dividido em duas camadas:
+
+- [`src/data/`](src/data/) guarda o que **não** depende de idioma: datas, nomes de
+  empresa e escola, URLs dos projetos, linguagens e o código de barras. Cada
+  cargo, projeto, competência e curso tem um id.
+- [`src/i18n/`](src/i18n/) guarda **todo** o texto, um arquivo por idioma
+  (`pt.ts`, `en.ts`, `es.ts`), chaveado por esses ids.
+
+A divisão existe para que uma URL de projeto ou uma data não precise ser repetida
+— e ficar desatualizada — em três arquivos. O contrato é a interface `Dictionary`
+em [`src/i18n/types.ts`](src/i18n/types.ts): como ela usa `Record<RoleId, …>`, o
+`npm run typecheck` reprova qualquer idioma que esqueça uma entrada.
+
+Os componentes só renderizam o que recebem. [`src/components/Page.tsx`](src/components/Page.tsx)
+é a página inteira e recebe o idioma; `src/pages/index.tsx`, `src/pages/en/index.tsx`
+e `src/pages/es/index.tsx` só a chamam.
+
+### Adicionar um idioma
+
+1. Acrescente o código em `Locale` e em `localeMeta`, em
+   [`src/i18n/locales.ts`](src/i18n/locales.ts).
+2. Copie um dicionário existente para `src/i18n/<código>.ts` e traduza; o
+   typecheck aponta o que falta.
+3. Registre o arquivo em [`src/i18n/index.ts`](src/i18n/index.ts).
+4. Crie `src/pages/<código>/index.tsx` com `<Page locale="<código>" />`.
+
+O seletor de idioma, as tags `hreflang` e as `og:locale:alternate` saem da lista
+de `locales` — não precisam ser mexidos.
+
+### Por que não o i18n do Next
+
+O roteamento i18n nativo não funciona com `output: 'export'`: ele está na lista
+de features não suportadas do export estático, junto com rewrites e redirects.
+Daí uma página por idioma, e `trailingSlash: true` no
+[`next.config.js`](next.config.js) para o export gerar `en/index.html` em vez de
+`en.html` — assim o GitHub Pages serve `/en` como índice de diretório, sem
+depender de reescrever a extensão.
 
 ## Verificação
 
@@ -40,6 +81,9 @@ npm run og
 ```
 
 Rode de novo se `nameBarcode` em `src/data/profile.ts` mudar.
+
+A mesma imagem serve aos três idiomas — ela é só o código de barras com o nome,
+sem texto traduzível. O que muda por idioma é o `og:image:alt`.
 
 ## Deploy
 

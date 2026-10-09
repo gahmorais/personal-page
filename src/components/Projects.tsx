@@ -1,12 +1,24 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import { Project } from "@/data/projects";
+import { Dictionary, Locale, localeMeta } from "@/i18n";
 
-const ALL = "Todas";
+// A aba que não filtra nada é comparada contra nomes de linguagem, então o valor
+// é uma sentinela interna: traduzir só o rótulo evita colisão com uma linguagem
+const ALL = "__all__";
 
-export default function Projects({ projects }: { projects: Project[] }) {
+interface IPropsProjects {
+  projects: Project[];
+  locale: Locale;
+  t: Dictionary["projects"];
+}
+
+export default function Projects({ projects, locale, t }: IPropsProjects) {
   const languages = [ALL, ...Array.from(new Set(projects.flatMap((p) => p.languages)))];
   const [selected, setSelected] = useState(ALL);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // "C e C#", "C and C#", "C y C#": a conjunção e a vírgula saem do ICU
+  const list = new Intl.ListFormat(localeMeta[locale].htmlLang, { type: "conjunction" });
 
   const visible =
     selected === ALL ? projects : projects.filter((p) => p.languages.includes(selected));
@@ -31,7 +43,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
     <div>
       <div
         role="tablist"
-        aria-label="Filtrar projetos por linguagem"
+        aria-label={t.filterLabel}
         className="-mx-4 flex gap-2 overflow-x-auto px-4 py-1"
         onKeyDown={handleKeyDown}
       >
@@ -56,7 +68,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   : "border-rule text-ink hover:border-ink"
               }`}
             >
-              {language}
+              {language === ALL ? t.all : language}
             </button>
           );
         })}
@@ -69,21 +81,21 @@ export default function Projects({ projects }: { projects: Project[] }) {
         className="mt-6"
       >
         <p className="text-graphite" aria-live="polite">
-          {visible.length === 1 ? "1 projeto" : `${visible.length} projetos`}
+          {t.count(visible.length)}
         </p>
         <ul key={selected} className="fade-in mt-4 divide-y divide-rule border-y border-rule">
           {visible.map((project) => (
-            <li key={project.url} className="relative py-5">
+            <li key={project.id} className="relative py-5">
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xl font-semibold underline-offset-4 after:absolute after:inset-0 hover:underline"
               >
-                {project.title}
+                {t.item[project.id].title}
               </a>
-              <p className="mt-1 text-sm text-graphite">{project.languages.join(" e ")}</p>
-              <p className="mt-2 max-w-prose">{project.description}</p>
+              <p className="mt-1 text-sm text-graphite">{list.format(project.languages)}</p>
+              <p className="mt-2 max-w-prose">{t.item[project.id].description}</p>
             </li>
           ))}
         </ul>
