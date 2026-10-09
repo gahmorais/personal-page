@@ -20,7 +20,9 @@ function period(role: Role) {
 function RoleHeading({ role }: { role: Role }) {
   return (
     <>
-      <span className="block text-sm text-graphite md:hidden">{laneLabel[role.lane]}</span>
+      {/* No desktop a coluna já mostra a área, mas a posição na grid é só visual:
+          o rótulo continua no DOM para o leitor de tela não perder a informação */}
+      <span className="block text-sm text-graphite md:sr-only">{laneLabel[role.lane]}</span>
       <span className="block text-xl font-semibold">{role.title}</span>
       <span className="block text-graphite">{role.company}</span>
     </>

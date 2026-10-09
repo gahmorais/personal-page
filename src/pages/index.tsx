@@ -5,19 +5,42 @@ import Section from "@/components/Section";
 import Timeline from "@/components/Timeline";
 import { education, links, nameBarcode, roles, skills } from "@/data/profile";
 import { projects } from "@/data/projects";
+import { siteUrl } from "../../site.config";
 
 const linkClass =
   "underline decoration-rule decoration-2 underline-offset-4 hover:decoration-ink";
+
+const title = "Gabriel Morais | Engenheiro de software";
+const description =
+  "Engenheiro de software que lidera apps Android para coletores de dados e terminais de consulta no varejo.";
+const ogImage = `${siteUrl}/og.png`;
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Gabriel Morais | Engenheiro de software</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        {/* Open Graph: o card que LinkedIn, WhatsApp e afins montam a partir do link */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Gabriel Morais" />
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:url" content={`${siteUrl}/`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta
-          name="description"
-          content="Engenheiro de software que lidera apps Android para coletores de dados e terminais de consulta no varejo."
+          property="og:image:alt"
+          content="Código de barras com o nome Gabriel Morais, lido por uma linha de laser"
         />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
       </Head>
 
       <main className="mx-auto max-w-[880px] space-y-20 px-4 py-16 sm:px-6 sm:py-24">

@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "og": "node scripts/generate-og.js"
   },
   "homepage": "https://gahmorais.github.io/personal-page",
   "dependencies": {
